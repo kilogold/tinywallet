@@ -9,10 +9,24 @@
   },
   "name": "tinywallet",
   "version": "1.0.0",
+  "main": "dist/core.js",
   "author": "kilogold",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "typescript": "^5.4.5"
-  }
+    "typescript": "^5.4.5",
+    "rsync": "^0.6.1"
+  },
+  "scripts": {
+    "build": "rm -fr dist && tsc",
+    "prepare": "npm run build",
+    "postinstall": "rsync -a dist/ . && rm -fr dist"
+  },
+  "files": [
+    "**/*.js",
+    "**/*.ts",
+    "**/*.json",
+    "dist",
+    "!node_modules"    
+  ]
 }
