@@ -4,9 +4,11 @@
     "@ledgerhq/hw-app-solana": "^7.1.6",
     "@ledgerhq/hw-transport-node-hid": "^6.28.6",
     "@solana-developers/helpers": "^2.3.0",
-    "@solana/web3.js": "^1.91.8",
-    "bs58": "^5.0.0",
-    "dotenv": "^16.4.5"
+    "@solana/web3.js": "^1.95.4",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "@turnkey/sdk-server": "^1.5.0",
+    "@turnkey/solana": "^1.0.1"
   },
   "name": "tinywallet",
   "version": "1.0.0",
