@@ -1,4 +1,4 @@
-import web3js from "@solana/web3.js";
+import { Keypair, PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { KeyManager } from "../keymanager";
 import fs from "fs";
 
@@ -32,19 +32,19 @@ export class LocalKeyManager implements KeyManager {
             throw new Error("Keystore file already exists. Use overwrite flag to overwrite the file.");
         }
 
-        const kp = web3js.Keypair.generate();
+        const kp = Keypair.generate();
 
         // Write the private key to file using the keystorePath.
         fs.writeFileSync(this.keystorePath, `[${kp.secretKey}]`);
     }
 
-    loadKey(): web3js.Keypair {
+    loadKey(): Keypair {
         const secret = JSON.parse(fs.readFileSync(this.keystorePath).toString()) as number[];
         const secretKey = Uint8Array.from(secret);
-        return web3js.Keypair.fromSecretKey(secretKey);
+        return Keypair.fromSecretKey(secretKey);
     }
 
-    getPublicKey(): Promise<web3js.PublicKey> {
+    getPublicKey(): Promise<PublicKey> {
         return new Promise((resolve, reject) => {
             try {
                 resolve(this.loadKey().publicKey);
@@ -54,7 +54,7 @@ export class LocalKeyManager implements KeyManager {
         });
     }
 
-    sign(txn: web3js.VersionedTransaction) {
+    sign(txn: VersionedTransaction) {
         txn.sign([this.loadKey()]);
     }
 }
