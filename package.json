@@ -19,8 +19,7 @@
   },
   "scripts": {
     "build": "rm -fr dist && tsc",
-    "prepare": "npm run build",
-    "postinstall": "rsync -a dist/ . && rm -fr dist"
+    "prepare": "npm run build"
   },
   "files": [
     "**/*.js",
@@ -28,5 +27,6 @@
     "**/*.json",
     "dist",
     "!node_modules"    
-  ]
+  ],
+  "types": "dist/core.d.ts"
 }
