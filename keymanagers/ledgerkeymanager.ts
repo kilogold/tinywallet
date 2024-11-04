@@ -1,7 +1,6 @@
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 import Solana from "@ledgerhq/hw-app-solana";
-import { Keypair, PublicKey, Transaction, VersionedTransaction } from "@solana/web3.js";
-import { Wallet } from "@coral-xyz/anchor";
+import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { KeyManager } from "../keymanager";
 import bs58 from 'bs58';
 
