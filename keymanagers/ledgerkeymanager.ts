@@ -4,7 +4,6 @@ import { Keypair, PublicKey, Transaction, VersionedTransaction } from "@solana/w
 import { Wallet } from "@coral-xyz/anchor";
 import { KeyManager } from "../keymanager";
 import bs58 from 'bs58';
-import { Command } from "commander";
 
 const firstAccountPathSolana = "44'/501'/0'";
 
@@ -17,20 +16,6 @@ export class LedgerKeyManager implements KeyManager {
     }
     async getPublicKey(): Promise<PublicKey> {
         return new PublicKey(await this.getAddress());
-    }
-    populateCommands(program: Command) {
-        program
-        .command('key-show')
-        .description('Show the existing public key address')
-        .action(async () => {
-            this.getAddress()
-                .then((keypairAddress) => {
-                    console.log(`${keypairAddress}`);
-                })
-                .catch(() => {
-                    console.log(`Cannot access Ledger device.\nPlease ensure it is connected, unlocked, and running the Solana app.`);
-                });
-        });
     }
 
     public static async createAsync(): Promise<LedgerKeyManager> {

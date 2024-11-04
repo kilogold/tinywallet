@@ -27,20 +27,6 @@ class LedgerKeyManager {
             return new web3_js_1.PublicKey(yield this.getAddress());
         });
     }
-    populateCommands(program) {
-        program
-            .command('key-show')
-            .description('Show the existing public key address')
-            .action(() => __awaiter(this, void 0, void 0, function* () {
-            this.getAddress()
-                .then((keypairAddress) => {
-                console.log(`${keypairAddress}`);
-            })
-                .catch(() => {
-                console.log(`Cannot access Ledger device.\nPlease ensure it is connected, unlocked, and running the Solana app.`);
-            });
-        }));
-    }
     static createAsync() {
         return __awaiter(this, void 0, void 0, function* () {
             const transport = yield hw_transport_node_hid_1.default.create();

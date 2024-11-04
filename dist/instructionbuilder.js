@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ix_Transfer = void 0;
+exports.ix_Transfer = ix_Transfer;
 const web3_js_1 = require("@solana/web3.js");
 function ix_Transfer(embeddedWallet, receiverAddr, amount) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -22,5 +22,4 @@ function ix_Transfer(embeddedWallet, receiverAddr, amount) {
         ];
     });
 }
-exports.ix_Transfer = ix_Transfer;
 //# sourceMappingURL=instructionbuilder.js.map
