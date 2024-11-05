@@ -1,23 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
+    // "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "allowJs": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "declaration": false,
+    "declaration": true,
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "src",
     "lib": [
       "es7",
       "dom"
     ],
-    "esModuleInterop": true
+    // "esModuleInterop": true
   },
   "include": [
-    "src/**/*",
-    "tests/**/*"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }
