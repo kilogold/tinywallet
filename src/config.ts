@@ -7,6 +7,7 @@ import { Commitment } from '@solana/web3.js';
 export enum KeystoreType {
     Local = "local",
     Ledger = "ledger",
+    Turnkey = "turnkey"
 }
 
 class coreConfig {

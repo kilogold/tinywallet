@@ -35,7 +35,7 @@ export class TurnKeyManager implements KeyManager {
     async sign(txn: VersionedTransaction) {
 
         try {
-            return (await turnkeySigner.signTransaction(
+            txn = (await turnkeySigner.signTransaction(
                 txn,
                 await this.getAddress()
             )) as VersionedTransaction;
