@@ -21,15 +21,17 @@ class coreConfig {
         this.keystoreType = (process.env.KEYSTORE_TYPE as KeystoreType);
 
         if (isNew) {
+            console.log(`Deleting config file at ${this.getConfigPath()}`);
             fs.rmSync(this.getConfigPath(), { recursive: false, force: true });
         }
-            
-        this.read();
+        else {
+            console.log(`Reading config file at ${this.getConfigPath()}`);
+            this.read();
+        }
     }
 
     private getConfigPath() {
-        const homeDir = os.homedir();
-        return path.join(homeDir, '.config', 'hellowallet', 'config.json');
+        return process.env.CONFIG_PATH;
     }
 
     private read() {
@@ -54,5 +56,5 @@ class coreConfig {
     }
 }
 
-const config = new coreConfig(true);
+const config = new coreConfig(false);
 export default config;
