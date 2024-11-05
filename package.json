@@ -1,10 +1,11 @@
 {
   "dependencies": {
-    "@coral-xyz/anchor": "^0.30.0",
-    "@ledgerhq/hw-app-solana": "^7.1.6",
-    "@ledgerhq/hw-transport-node-hid": "^6.28.6",
-    "@solana-developers/helpers": "^2.3.0",
+    "@coral-xyz/anchor": "^0.30.1",
+    "@ledgerhq/hw-app-solana": "^7.2.4",
+    "@ledgerhq/hw-transport-node-hid": "^6.29.5",
+    "@solana-developers/helpers": "^2.5.6",
     "@solana/web3.js": "^1.95.4",
+    "@solana/spl-token": "^0.4.9",
     "@turnkey/sdk-server": "^1.5.0",
     "@turnkey/solana": "^1.0.1",
     "bs58": "^6.0.0",
