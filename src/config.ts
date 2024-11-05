@@ -10,11 +10,15 @@ export enum KeystoreType {
 }
 
 class coreConfig {
-    rpcUrl: string = "http://127.0.0.1:8899";
-    commitment: Commitment = "confirmed";
-    keystoreType: KeystoreType = KeystoreType.Local;
+    rpcUrl: string;
+    commitment: Commitment;
+    keystoreType: KeystoreType;
 
     constructor(isNew: boolean = false) {
+        this.rpcUrl = process.env.RPC_URL;
+        this.commitment = (process.env.COMMITMENT as Commitment);
+        this.keystoreType = (process.env.KEYSTORE_TYPE as KeystoreType);
+
         if (isNew) {
             fs.rmSync(this.getConfigPath(), { recursive: false, force: true });
         }
