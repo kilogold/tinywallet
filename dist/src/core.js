@@ -59,14 +59,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.core = void 0;
+exports.core = exports.KeystoreType = void 0;
 var web3_js_1 = require("@solana/web3.js");
 var config_1 = __importStar(require("./config"));
+Object.defineProperty(exports, "KeystoreType", { enumerable: true, get: function () { return config_1.KeystoreType; } });
 var ledgerkeymanager_1 = require("./keymanagers/ledgerkeymanager");
 var localkeymanager_1 = require("./keymanagers/localkeymanager");
 var turnkeymanager_1 = require("./keymanagers/turnkeymanager");
-// Re-exports
-//export { KeystoreType };
 var core = /** @class */ (function () {
     function core(keymanager) {
         this.keymanager = keymanager;
