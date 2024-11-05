@@ -1,4 +1,4 @@
-import { LedgerKeyManager } from '../ledgerkeymanager';
+import { LedgerKeyManager } from '../keymanagers/ledgerkeymanager';
 
 describe('LedgerKeyManager', () => {
 
