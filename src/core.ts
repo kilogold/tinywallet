@@ -36,7 +36,7 @@ export class core {
                 throw new Error(`Unsupported keystore type.`);
         }
 
-        return new core(keymanager);
+        return new core(keymanager!);
     }
 
     GetKeystoreType() {
