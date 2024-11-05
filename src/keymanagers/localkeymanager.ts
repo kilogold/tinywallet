@@ -1,6 +1,6 @@
 import { Keypair, PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { KeyManager } from "../keymanager";
-import fs from "fs";
+import {existsSync, readFileSync, unlinkSync, writeFileSync} from "fs";
 
 export class LocalKeyManager implements KeyManager {
 
@@ -11,8 +11,8 @@ export class LocalKeyManager implements KeyManager {
     }
 
     purgeKey() {
-        if (fs.existsSync(this.keystorePath)) {
-            fs.unlinkSync(this.keystorePath);
+        if (existsSync(this.keystorePath)) {
+            unlinkSync(this.keystorePath);
         }
     }
 
@@ -28,18 +28,18 @@ export class LocalKeyManager implements KeyManager {
 
     generateKey(overwrite: boolean = false) {
 
-        if (fs.existsSync(this.keystorePath) && !overwrite) {
+        if (existsSync(this.keystorePath) && !overwrite) {
             throw new Error("Keystore file already exists. Use overwrite flag to overwrite the file.");
         }
 
         const kp = Keypair.generate();
 
         // Write the private key to file using the keystorePath.
-        fs.writeFileSync(this.keystorePath, `[${kp.secretKey}]`);
+        writeFileSync(this.keystorePath, `[${kp.secretKey}]`);
     }
 
     loadKey(): Keypair {
-        const secret = JSON.parse(fs.readFileSync(this.keystorePath).toString()) as number[];
+        const secret = JSON.parse(readFileSync(this.keystorePath).toString()) as number[];
         const secretKey = Uint8Array.from(secret);
         return Keypair.fromSecretKey(secretKey);
     }
