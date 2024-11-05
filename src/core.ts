@@ -6,7 +6,7 @@ import { LocalKeyManager } from './keymanagers/localkeymanager';
 import { TurnKeyManager } from "./keymanagers/turnkeymanager";
 
 // Re-exports
-export { KeystoreType };
+//export { KeystoreType };
 
 export class core {
 

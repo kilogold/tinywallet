@@ -25,41 +25,49 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KeystoreType = void 0;
 // config.ts
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const os = __importStar(require("os"));
+var fs = __importStar(require("fs"));
+var path = __importStar(require("path"));
 var KeystoreType;
 (function (KeystoreType) {
     KeystoreType["Local"] = "local";
     KeystoreType["Ledger"] = "ledger";
+    KeystoreType["Turnkey"] = "turnkey";
 })(KeystoreType || (exports.KeystoreType = KeystoreType = {}));
-class coreConfig {
-    constructor() {
-        this.rpcUrl = "https://api.devnet.solana.com ";
-        this.commitment = "confirmed";
-        this.keystoreType = KeystoreType.Local;
-        this.read();
-    }
-    getConfigPath() {
-        const homeDir = os.homedir();
-        return path.join(homeDir, '.config', 'hellowallet', 'config.json');
-    }
-    read() {
-        const configPath = this.getConfigPath();
-        if (fs.existsSync(configPath)) {
-            const rawConfig = fs.readFileSync(configPath, 'utf-8');
-            const fileConfig = JSON.parse(rawConfig);
-            Object.assign(this, fileConfig);
+var coreConfig = /** @class */ (function () {
+    function coreConfig(isNew) {
+        if (isNew === void 0) { isNew = false; }
+        this.rpcUrl = process.env.RPC_URL;
+        this.commitment = process.env.COMMITMENT;
+        this.keystoreType = process.env.KEYSTORE_TYPE;
+        if (isNew) {
+            console.log("Deleting config file at ".concat(this.getConfigPath()));
+            fs.rmSync(this.getConfigPath(), { recursive: false, force: true });
+        }
+        else {
+            console.log("Reading config file at ".concat(this.getConfigPath()));
+            this.read();
         }
     }
-    write() {
-        const configPath = this.getConfigPath();
-        const configDir = path.dirname(configPath);
+    coreConfig.prototype.getConfigPath = function () {
+        return process.env.CONFIG_PATH;
+    };
+    coreConfig.prototype.read = function () {
+        var configPath = this.getConfigPath();
+        if (fs.existsSync(configPath)) {
+            var rawConfig = fs.readFileSync(configPath, 'utf-8');
+            var fileConfig = JSON.parse(rawConfig);
+            Object.assign(this, fileConfig);
+        }
+    };
+    coreConfig.prototype.write = function () {
+        var configPath = this.getConfigPath();
+        var configDir = path.dirname(configPath);
         if (!fs.existsSync(configDir)) {
             fs.mkdirSync(configDir, { recursive: true });
         }
         fs.writeFileSync(configPath, JSON.stringify(this, null, 2));
-    }
-}
-const config = new coreConfig();
+    };
+    return coreConfig;
+}());
+var config = new coreConfig(false);
 exports.default = config;
