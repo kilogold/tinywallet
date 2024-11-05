@@ -27,7 +27,7 @@
   "scripts": {
     "build": "rm -fr dist && tsc",
     "prepare": "pnpm run build",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "files": [
     "**/*.js",

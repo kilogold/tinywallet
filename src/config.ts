@@ -10,11 +10,15 @@ export enum KeystoreType {
 }
 
 class coreConfig {
-    rpcUrl: string = "https://api.devnet.solana.com ";
+    rpcUrl: string = "http://127.0.0.1:8899";
     commitment: Commitment = "confirmed";
     keystoreType: KeystoreType = KeystoreType.Local;
 
-    constructor() {
+    constructor(isNew: boolean = false) {
+        if (isNew) {
+            fs.rmSync(this.getConfigPath(), { recursive: false, force: true });
+        }
+            
         this.read();
     }
 
@@ -45,5 +49,5 @@ class coreConfig {
     }
 }
 
-const config = new coreConfig();
+const config = new coreConfig(true);
 export default config;

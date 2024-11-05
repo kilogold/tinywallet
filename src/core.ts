@@ -15,10 +15,10 @@ export class core {
         this.connection = new Connection(config.rpcUrl, config.commitment);
     }
 
-    static async CreateAsync() {
+    static async CreateAsync(keystoreType: KeystoreType = config.keystoreType) {
         let keymanager: KeyManager;
 
-        switch (config.keystoreType) {
+        switch (keystoreType) {
             case KeystoreType.Local:
                 keymanager = new LocalKeyManager();
                 break;

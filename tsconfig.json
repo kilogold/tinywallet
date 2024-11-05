@@ -9,13 +9,14 @@
     "resolveJsonModule": true,
     "declaration": false,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "lib": [
       "es7",
       "dom"
     ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests/**/*"
   ]
 }
