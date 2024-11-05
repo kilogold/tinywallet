@@ -50,12 +50,7 @@ describe('LocalKeyManager', () => {
 
         const txId = await embeddedWallet.SendTransaction(txn);
 
-        // Wait for confirmation
-        const latestBlockHash = await embeddedWallet.connection.getLatestBlockhash();
-        const confirmStrategy: BlockheightBasedTransactionConfirmationStrategy = {
-            blockhash: latestBlockHash.blockhash,
-            lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
-            signature: txId
-        }
+        // Wait manually to simulate confirmation
+        await new Promise(resolve => setTimeout(resolve, 550));          
     });
 }); 
