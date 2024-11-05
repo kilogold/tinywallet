@@ -1,4 +1,4 @@
-import { LocalKeyManager } from '../keymanagers/localkeymanager';
+import { LocalKeyManager } from '../src/keymanagers/localkeymanager';
 
 describe('LocalKeyManager', () => {
 
