@@ -3,6 +3,7 @@ import { Connection, PublicKey, TransactionInstruction, TransactionMessage, Vers
 import config, { KeystoreType } from "./config";
 import { LedgerKeyManager } from './keymanagers/ledgerkeymanager';
 import { LocalKeyManager } from './keymanagers/localkeymanager';
+import { TurnKeyManager } from "./keymanagers/turnkeymanager";
 
 
 export class core {
@@ -24,6 +25,9 @@ export class core {
                 break;
             case KeystoreType.Ledger:
                 keymanager = await LedgerKeyManager.createAsync();
+                break;
+            case KeystoreType.Turnkey:
+                keymanager = new TurnKeyManager();
                 break;
             default:
                 throw new Error(`Unsupported keystore type.`);
