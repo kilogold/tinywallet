@@ -8,7 +8,7 @@ import { TurnKeyManager } from "./keymanagers/turnkeymanager";
 // Re-exports
 export { KeystoreType };
 
-export class core {
+export default class core {
 
     readonly keymanager: KeyManager;
     readonly connection: Connection;
