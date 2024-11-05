@@ -9,16 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ix_Transfer = ix_Transfer;
-const web3_js_1 = require("@solana/web3.js");
-function ix_Transfer(embeddedWallet, receiverAddr, amount) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return [
-            web3_js_1.SystemProgram.transfer({
-                fromPubkey: yield embeddedWallet.keymanager.getPublicKey(),
-                toPubkey: new web3_js_1.PublicKey(receiverAddr),
-                lamports: amount,
-            }),
-        ];
+const ledgerkeymanager_1 = require("../ledgerkeymanager");
+describe('LedgerKeyManager', () => {
+    let ledgerKeyManager;
+    beforeEach(() => {
+        ledgerKeyManager = new ledgerkeymanager_1.LedgerKeyManager({});
     });
-}
+    it('should stub get the public key', () => __awaiter(void 0, void 0, void 0, function* () {
+        // Stub test
+        expect(true).toBe(true);
+    }));
+    it('should stub sign a transaction', () => __awaiter(void 0, void 0, void 0, function* () {
+        // Stub test
+        expect(true).toBe(true);
+    }));
+});

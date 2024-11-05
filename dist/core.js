@@ -96,4 +96,3 @@ class core {
     }
 }
 exports.core = core;
-//# sourceMappingURL=core.js.map

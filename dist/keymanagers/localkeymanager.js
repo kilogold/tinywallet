@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocalKeyManager = void 0;
-const web3_js_1 = __importDefault(require("@solana/web3.js"));
+const web3_js_1 = require("@solana/web3.js");
 const fs_1 = __importDefault(require("fs"));
 class LocalKeyManager {
     constructor() {
@@ -40,14 +40,14 @@ class LocalKeyManager {
         if (fs_1.default.existsSync(this.keystorePath) && !overwrite) {
             throw new Error("Keystore file already exists. Use overwrite flag to overwrite the file.");
         }
-        const kp = web3_js_1.default.Keypair.generate();
+        const kp = web3_js_1.Keypair.generate();
         // Write the private key to file using the keystorePath.
         fs_1.default.writeFileSync(this.keystorePath, `[${kp.secretKey}]`);
     }
     loadKey() {
         const secret = JSON.parse(fs_1.default.readFileSync(this.keystorePath).toString());
         const secretKey = Uint8Array.from(secret);
-        return web3_js_1.default.Keypair.fromSecretKey(secretKey);
+        return web3_js_1.Keypair.fromSecretKey(secretKey);
     }
     getPublicKey() {
         return new Promise((resolve, reject) => {
@@ -64,4 +64,3 @@ class LocalKeyManager {
     }
 }
 exports.LocalKeyManager = LocalKeyManager;
-//# sourceMappingURL=localkeymanager.js.map

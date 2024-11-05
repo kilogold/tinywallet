@@ -63,4 +63,3 @@ class coreConfig {
 }
 const config = new coreConfig();
 exports.default = config;
-//# sourceMappingURL=config.js.map
