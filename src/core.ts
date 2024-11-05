@@ -7,6 +7,7 @@ import { TurnKeyManager } from "./keymanagers/turnkeymanager";
 
 // Re-exports
 export { KeystoreType };
+export * from "./instructionbuilder";
 
 export class core {
 

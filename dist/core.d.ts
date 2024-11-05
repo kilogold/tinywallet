@@ -2,6 +2,7 @@ import { KeyManager } from "./keymanager";
 import { Connection, PublicKey, TransactionInstruction, VersionedTransaction } from "@solana/web3.js";
 import { KeystoreType } from "./config";
 export { KeystoreType };
+export * from "./instructionbuilder";
 export declare class core {
     readonly keymanager: KeyManager;
     readonly connection: Connection;
