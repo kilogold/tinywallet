@@ -23,18 +23,21 @@ describe('LocalKeyManager', () => {
     });
 
     it('should sign and submit a transaction', async () => {
-
         const amount = TOTAL_AIRDROP_AMOUNT / 10;
         const receiverAccount = Keypair.generate().publicKey;
 
-        const ix = await ix_Transfer(await embeddedWallet.keymanager.getPublicKey(), receiverAccount, amount);
+        const ix = await ix_Transfer(
+            (await embeddedWallet.keymanager.getPublicKey()).toBase58(),
+            receiverAccount.toBase58(),
+            amount.toString()
+        );
         const txn = await embeddedWallet.BuildTransaction([ix], await embeddedWallet.keymanager.getPublicKey());
-        
+
         await embeddedWallet.SignTransaction(txn);
 
         const txId = await embeddedWallet.SendTransaction(txn);
 
         // Wait manually to simulate confirmation
-        await new Promise(resolve => setTimeout(resolve, 550));          
+        await new Promise(resolve => setTimeout(resolve, 550));
     });
 }); 

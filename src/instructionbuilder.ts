@@ -13,10 +13,14 @@ import {
 } from "@solana/spl-token";
 
 export async function ix_Transfer(
-    senderAccount: PublicKey, 
-    receiverAccount: PublicKey, 
-    amount: number
+    senderAccountStr: string, 
+    receiverAccountStr: string, 
+    amountStr: string
 ): Promise<TransactionInstruction> {
+    const senderAccount = new PublicKey(senderAccountStr);
+    const receiverAccount = new PublicKey(receiverAccountStr);
+    const amount = BigInt(amountStr);
+
     return SystemProgram.transfer({
         fromPubkey: senderAccount,
         toPubkey: receiverAccount,
@@ -25,12 +29,18 @@ export async function ix_Transfer(
 }
 
 export async function ix_TransferSPL(
-    senderAccount: PublicKey,
-    receiverAccount: PublicKey,
-    amount: number,
-    tokenProgramId: PublicKey,
-    mint: PublicKey
+    senderAccountStr: string,
+    receiverAccountStr: string,
+    amountStr: string,
+    tokenProgramIdStr: string,
+    mintStr: string
 ): Promise<TransactionInstruction> {
+    const senderAccount = new PublicKey(senderAccountStr);
+    const receiverAccount = new PublicKey(receiverAccountStr);
+    const amount = BigInt(amountStr);
+    const tokenProgramId = new PublicKey(tokenProgramIdStr);
+    const mint = new PublicKey(mintStr);
+
     // Derive the associated token accounts for the sender and receiver
     const senderTokenAccount = await getAssociatedTokenAddress(
         mint,
