@@ -5,6 +5,8 @@ import { LedgerKeyManager } from './keymanagers/ledgerkeymanager';
 import { LocalKeyManager } from './keymanagers/localkeymanager';
 import { TurnKeyManager } from "./keymanagers/turnkeymanager";
 
+// Re-exports
+export { KeystoreType };
 
 export class core {
 
