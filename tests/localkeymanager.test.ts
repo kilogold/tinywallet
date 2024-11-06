@@ -1,7 +1,7 @@
 import { core } from '../src/core';
 import { ix_Transfer } from '../src/instructionbuilder';
-import { Keypair, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
-import { KeystoreType } from '../src/config';
+import { Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { KeystoreType } from '../src/keymanager';
 
 describe('LocalKeyManager', () => {
     const TOTAL_AIRDROP_AMOUNT = 1 * LAMPORTS_PER_SOL;
