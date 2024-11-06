@@ -24,35 +24,44 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.core = exports.KeystoreType = void 0;
-const web3_js_1 = require("@solana/web3.js");
 const keymanager_1 = require("./keymanager");
 Object.defineProperty(exports, "KeystoreType", { enumerable: true, get: function () { return keymanager_1.KeystoreType; } });
-const ledgerkeymanager_1 = require("./keymanagers/ledgerkeymanager");
-const localkeymanager_1 = require("./keymanagers/localkeymanager");
-const turnkeymanager_1 = require("./keymanagers/turnkeymanager");
+const web3_js_1 = require("@solana/web3.js");
 __exportStar(require("./instructionbuilder"), exports);
 class core {
-    constructor(keymanager, connection = new web3_js_1.Connection(process.env.RPC_URL, process.env.COMMITMENT)) {
+    constructor(keymanager, connection) {
         this.keymanager = keymanager;
         this.connection = connection;
     }
     static CreateAsync() {
-        return __awaiter(this, arguments, void 0, function* (keystoreType = process.env.KEYSTORE_TYPE) {
+        return __awaiter(this, arguments, void 0, function* (keystoreType = process.env.KEYSTORE_TYPE, connection) {
+            console.log(`Creating Async: ${keystoreType}`);
             let keymanager;
             switch (keystoreType) {
                 case keymanager_1.KeystoreType.Local:
-                    keymanager = new localkeymanager_1.LocalKeyManager();
+                    {
+                        const { LocalKeyManager } = yield Promise.resolve().then(() => require('./keymanagers/localkeymanager'));
+                        keymanager = new LocalKeyManager();
+                    }
                     break;
                 case keymanager_1.KeystoreType.Ledger:
-                    keymanager = yield ledgerkeymanager_1.LedgerKeyManager.createAsync();
+                    {
+                        const { LedgerKeyManager } = yield Promise.resolve().then(() => require('./keymanagers/ledgerkeymanager'));
+                        keymanager = yield LedgerKeyManager.createAsync();
+                    }
                     break;
                 case keymanager_1.KeystoreType.Turnkey:
-                    keymanager = new turnkeymanager_1.TurnKeyManager();
+                    {
+                        const { TurnKeyManager } = yield Promise.resolve().then(() => require('./keymanagers/turnkeymanager'));
+                        keymanager = new TurnKeyManager();
+                    }
                     break;
                 default:
                     throw new Error(`Unsupported keystore type.`);
             }
-            return new core(keymanager);
+            // Use the provided connection or create a new one
+            const conn = connection || new web3_js_1.Connection(process.env.RPC_URL, process.env.COMMITMENT);
+            return new core(keymanager, conn);
         });
     }
     GetKeystoreType() {
@@ -60,14 +69,18 @@ class core {
     }
     BuildTransaction(ix, payer) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(`Building Transaction`);
             const connection = this.connection;
             // create v0 compatible message
+            console.log(`Getting latest blockhash`);
             let { blockhash } = yield connection.getLatestBlockhash();
+            console.log(`Creating message`);
             const messageV0 = new web3_js_1.TransactionMessage({
                 payerKey: payer,
                 recentBlockhash: blockhash,
                 instructions: ix,
             }).compileToV0Message();
+            console.log(`Creating versioned transaction`);
             return new web3_js_1.VersionedTransaction(messageV0);
         });
     }
