@@ -1,5 +1,7 @@
 import { KeyManager, KeystoreType } from "./keymanager";
 import { Commitment, Connection, PublicKey, TransactionInstruction, TransactionMessage, VersionedTransaction } from "@solana/web3.js";
+import { TurnKeyManager } from './keymanagers/turnkeymanager';
+import { EnvironmentKeyManager } from './keymanagers/environmentkeymanager';
 
 // Re-exports
 export { KeystoreType };
@@ -26,27 +28,13 @@ export class core {
         let keymanager: KeyManager;
 
         switch (keystoreType) {
-            case KeystoreType.Local:
-                {
-                    const { LocalKeyManager } = await import('./keymanagers/localkeymanager');
-                    keymanager = new LocalKeyManager();
-                }
-                break;
-            case KeystoreType.Ledger:
-                {
-                    const { LedgerKeyManager } = await import('./keymanagers/ledgerkeymanager');
-                    keymanager = await LedgerKeyManager.createAsync();
-                }
-                break;
             case KeystoreType.Turnkey:
                 {
-                    const { TurnKeyManager } = await import('./keymanagers/turnkeymanager');
                     keymanager = new TurnKeyManager();
                 }
                 break;
             case KeystoreType.Environment:
                 {
-                    const { EnvironmentKeyManager } = await import('./keymanagers/environmentkeymanager');
                     keymanager = new EnvironmentKeyManager();
                 }
                 break;
