@@ -44,6 +44,12 @@ export class core {
                     keymanager = new TurnKeyManager();
                 }
                 break;
+            case KeystoreType.Environment:
+                {
+                    const { EnvironmentKeyManager } = await import('./keymanagers/environmentkeymanager');
+                    keymanager = new EnvironmentKeyManager();
+                }
+                break;
             default:
                 throw new Error(`Unsupported keystore type.`);
         }

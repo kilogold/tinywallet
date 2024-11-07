@@ -3,7 +3,8 @@ import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 export enum KeystoreType {
     Local = "local",
     Ledger = "ledger",
-    Turnkey = "turnkey"
+    Turnkey = "turnkey",
+    Environment = "environment"
 }
 
 export interface KeyManager {    
