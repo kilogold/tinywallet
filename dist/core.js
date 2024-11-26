@@ -56,6 +56,12 @@ class core {
                         keymanager = new TurnKeyManager();
                     }
                     break;
+                case keymanager_1.KeystoreType.Environment:
+                    {
+                        const { EnvironmentKeyManager } = yield Promise.resolve().then(() => require('./keymanagers/environmentkeymanager'));
+                        keymanager = new EnvironmentKeyManager();
+                    }
+                    break;
                 default:
                     throw new Error(`Unsupported keystore type.`);
             }

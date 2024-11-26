@@ -22,7 +22,6 @@ export class core {
         keystoreType: KeystoreType = process.env.KEYSTORE_TYPE as KeystoreType,
         connection?: Connection
     ) {
-        console.log(`Creating Async: ${keystoreType}`);
         let keymanager: KeyManager;
 
         switch (keystoreType) {
